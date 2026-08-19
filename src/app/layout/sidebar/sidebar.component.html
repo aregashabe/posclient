@@ -1,0 +1,339 @@
+<nav class="sidebar">
+
+  <ul class="nav">
+
+    <!-- DASHBOARD -->
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/dashboard">
+        <span class="menu-title">Dashboard</span>
+        <i class="mdi mdi-home menu-icon"></i>
+      </a>
+    </li>
+
+
+    <!-- EMPLOYEE -->
+    <li class="nav-item">
+
+      <a
+        class="nav-link"
+        (click)="toggleMenu('employee')"
+      >
+        <span class="menu-title">Employee</span>
+
+        <i
+          class="menu-arrow"
+          [class.open]="isOpen('employee')"
+        ></i>
+
+        <i class="mdi mdi-medical-bag menu-icon"></i>
+      </a>
+
+      @if (isOpen('employee')) {
+        <ul class="sub-menu">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewWaiter">
+              Waiter
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewDelivery">
+              Delivery
+            </a>
+          </li>
+
+        </ul>
+      }
+
+    </li>
+
+
+    <!-- POS -->
+    <li class="nav-item">
+
+      <a
+        class="nav-link"
+        [routerLink]="isOpeningBalanceComplete ? '/pos' : '/openningbalance'"
+      >
+        <span class="menu-title">POS</span>
+        <i class="mdi mdi-contacts menu-icon"></i>
+      </a>
+
+    </li>
+
+
+    <!-- ORDERS -->
+    <li class="nav-item">
+
+      <a
+        class="nav-link"
+        (click)="toggleMenu('orders')"
+      >
+        <span class="menu-title">Orders</span>
+
+        <i
+          class="menu-arrow"
+          [class.open]="isOpen('orders')"
+        ></i>
+
+        <i class="mdi mdi-cart menu-icon"></i>
+      </a>
+
+      @if (isOpen('orders')) {
+        <ul class="sub-menu">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/posorder">
+              Pos Order
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/paidorders">
+              Paid Order
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/cancelorders">
+              Cancel Order
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/runningorders">
+              Running Order
+            </a>
+          </li>
+
+        </ul>
+      }
+
+    </li>
+
+
+    <!-- MASTER -->
+    <li class="nav-item">
+
+      <a
+        class="nav-link"
+        (click)="toggleMenu('master')"
+      >
+        <span class="menu-title">Master</span>
+
+        <i
+          class="menu-arrow"
+          [class.open]="isOpen('master')"
+        ></i>
+
+        <i class="mdi mdi-contacts menu-icon"></i>
+      </a>
+
+      @if (isOpen('master')) {
+        <ul class="sub-menu">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewfoodcategory">
+              Food Category
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewfoodmenu">
+              Food Menu
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewingredientfoodcategory">
+              Ingredient Category
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewingredientunit">
+              Ingredient Unit
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewingredients">
+              Ingredients
+            </a>
+          </li>
+
+        </ul>
+      }
+
+    </li>
+
+
+    <!-- SETTINGS -->
+    <li class="nav-item">
+
+      <a
+        class="nav-link"
+        (click)="toggleMenu('settings')"
+      >
+        <span class="menu-title">Settings</span>
+
+        <i
+          class="menu-arrow"
+          [class.open]="isOpen('settings')"
+        ></i>
+
+        <i class="mdi mdi-cog menu-icon"></i>
+      </a>
+
+      @if (isOpen('settings')) {
+        <ul class="sub-menu">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewCustomer">
+              Customer
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewDesignation">
+              Designation
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewExpense">
+              Expense Category
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewTable">
+              Table
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewuser">
+              User
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewVat">
+              Vat
+            </a>
+          </li>
+
+        </ul>
+      }
+
+    </li>
+
+
+    <!-- INVENTORY -->
+    <li class="nav-item">
+
+      <a
+        class="nav-link"
+        (click)="toggleMenu('inventory')"
+      >
+        <span class="menu-title">Inventory</span>
+
+        <i
+          class="menu-arrow"
+          [class.open]="isOpen('inventory')"
+        ></i>
+
+        <i class="mdi mdi-package-variant menu-icon"></i>
+      </a>
+
+      @if (isOpen('inventory')) {
+        <ul class="sub-menu">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewSupplier">
+              Supplier
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/viewPurchase">
+              Purchase
+            </a>
+          </li>
+
+        </ul>
+      }
+
+    </li>
+
+
+    <!-- EXPENSE -->
+    <li class="nav-item">
+
+      <a class="nav-link" routerLink="/viewExpenseinvoice">
+
+        <span class="menu-title">
+          Expense
+        </span>
+
+        <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+
+      </a>
+
+    </li>
+
+
+    <!-- REPORTS -->
+    <li class="nav-item">
+
+      <a
+        class="nav-link"
+        (click)="toggleMenu('reports')"
+      >
+
+        <span class="menu-title">
+          Reports
+        </span>
+
+        <i
+          class="menu-arrow"
+          [class.open]="isOpen('reports')"
+        ></i>
+
+        <i class="mdi mdi-chart-bar menu-icon"></i>
+
+      </a>
+
+      @if (isOpen('reports')) {
+
+        <ul class="sub-menu">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dailveryReport">
+              Delivery Report
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/customerReport">
+              Customer Report
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/waiterReport">
+              Waiter Report
+            </a>
+          </li>
+
+        </ul>
+
+      }
+
+    </li>
+
+  </ul>
+
+</nav>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder,ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-user',
   imports: [ReactiveFormsModule],
@@ -9,7 +10,7 @@ import { UserService } from '../../services/user.service';
 })
 export class AddUserComponent {
   userForm: FormGroup;
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService,private router:Router) {
 
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -61,7 +62,7 @@ export class AddUserComponent {
       next: (response) => {
         console.log('User created successfully', response);
 
-        this.userForm.reset();
+        this.router.navigate(['/user-list'])
       },
       error: (error) => {
         console.error('Error creating user', error);

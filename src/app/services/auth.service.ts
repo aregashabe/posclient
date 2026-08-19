@@ -36,6 +36,9 @@ export class AuthService {
   }
   getCurrentUser() {
   return this.http.get<{
+    userId: number;
+    firstName: string;
+    lastName: string;
     email: string;
     role: string;
   }>(

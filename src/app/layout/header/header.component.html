@@ -1,0 +1,136 @@
+<header class="top-header">
+
+  <!-- LEFT SIDE -->
+  <div class="header-left">
+
+    <button
+      type="button"
+      class="menu-toggle"
+      aria-label="Toggle sidebar"
+    >
+      <i class="mdi mdi-menu"></i>
+    </button>
+
+    <a
+      class="brand"
+      routerLink="/dashboard"
+      (click)="closeProfileMenu()"
+    >
+      <img
+        src="/images/pos/burps.png"
+        alt="Burps Logo"
+        class="brand-logo"
+      />
+    </a>
+
+    <!-- SEARCH -->
+    <div class="search-box">
+
+      <i class="mdi mdi-magnify search-icon"></i>
+
+      <input
+        type="text"
+        placeholder="Search..."
+        aria-label="Search"
+      />
+
+    </div>
+
+  </div>
+
+
+  <!-- RIGHT SIDE -->
+  <div class="header-right">
+
+    <!-- USER PROFILE -->
+    <div class="profile-container">
+
+      <button
+        type="button"
+        class="profile-button"
+        (click)="toggleProfileMenu()"
+      >
+
+        <div class="profile-image-wrapper">
+
+          <img
+            src="/images/face2.jpg"
+            alt="Profile"
+            class="profile-image"
+          />
+
+          <span class="online-status"></span>
+
+        </div>
+
+        <div class="profile-info">
+
+          <span class="profile-name">
+            {{ fullName || 'User' }}
+          </span>
+
+          <span class="profile-role">
+            {{ userRole || 'User' }}
+          </span>
+
+        </div>
+
+        <i
+          class="mdi"
+          [class.mdi-chevron-down]="!profileMenuOpen"
+          [class.mdi-chevron-up]="profileMenuOpen"
+        ></i>
+
+      </button>
+
+
+      <!-- PROFILE DROPDOWN -->
+      @if (profileMenuOpen) {
+
+        <div class="profile-dropdown">
+
+          <div class="dropdown-user">
+
+            <img
+              src="/images/face2.jpg"
+              alt="Profile"
+            />
+
+            <div>
+              <strong>{{ fullName || 'User' }}</strong>
+              <span>{{ userRole || 'User' }}</span>
+            </div>
+
+          </div>
+
+
+          <div class="dropdown-divider"></div>
+
+
+        
+
+
+          <button
+            type="button"
+            class="dropdown-item logout-item"
+           
+          >
+
+            <i class="mdi mdi-logout"></i>
+
+            <span>Sign out</span>
+
+          </button>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    
+
+  </div>
+
+</header>

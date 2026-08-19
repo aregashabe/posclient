@@ -1,0 +1,520 @@
+.top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 24px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e8e8e8;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  z-index: 1000;
+}
+
+
+/* =========================================================
+   LEFT
+========================================================= */
+
+.header-left {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+
+/* =========================================================
+   MENU BUTTON
+========================================================= */
+
+.menu-toggle {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 15px;
+
+  border: none;
+  background: transparent;
+
+  color: #555;
+
+  font-size: 24px;
+
+  cursor: pointer;
+
+  border-radius: 6px;
+
+  transition: 0.2s ease;
+
+  &:hover {
+    background: #f3f4f6;
+    color: #333;
+  }
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.brand {
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+
+  margin-right: 35px;
+}
+
+.brand-logo {
+  width: 120px;
+  max-height: 48px;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-box {
+  width: 300px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+
+  background: #f6f7f9;
+
+  border: 1px solid #eeeeee;
+
+  border-radius: 8px;
+
+  padding: 0 12px;
+
+  transition: 0.2s ease;
+
+  &:focus-within {
+    background: #ffffff;
+    border-color: #cfd4dc;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03);
+  }
+}
+
+.search-icon {
+  font-size: 20px;
+
+  color: #888;
+
+  margin-right: 8px;
+}
+
+.search-box input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  font-size: 14px;
+
+  color: #333;
+
+  &::placeholder {
+    color: #999;
+  }
+}
+
+
+/* =========================================================
+   RIGHT
+========================================================= */
+
+.header-right {
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-container {
+  position: relative;
+}
+
+.profile-button {
+  display: flex;
+  align-items: center;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  padding: 6px 10px;
+
+  border-radius: 8px;
+
+  transition: 0.2s ease;
+
+  &:hover {
+    background: #f6f7f9;
+  }
+}
+
+
+/* =========================================================
+   PROFILE IMAGE
+========================================================= */
+
+.profile-image-wrapper {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  margin-right: 10px;
+}
+
+.profile-image {
+  width: 42px;
+  height: 42px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 2px solid #ffffff;
+
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ONLINE STATUS */
+
+.online-status {
+  position: absolute;
+
+  right: 0;
+  bottom: 1px;
+
+  width: 10px;
+  height: 10px;
+
+  background: #22c55e;
+
+  border: 2px solid #ffffff;
+
+  border-radius: 50%;
+}
+
+
+/* =========================================================
+   PROFILE TEXT
+========================================================= */
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  margin-right: 10px;
+}
+
+.profile-name {
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: #222;
+
+  white-space: nowrap;
+}
+
+.profile-role {
+  margin-top: 2px;
+
+  font-size: 11px;
+
+  color: #888;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   CHEVRON
+========================================================= */
+
+.profile-button > .mdi {
+  font-size: 20px;
+
+  color: #777;
+}
+
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.profile-dropdown {
+  position: absolute;
+
+  top: calc(100% + 10px);
+
+  right: 0;
+
+  width: 250px;
+
+  background: #ffffff;
+
+  border: 1px solid #eeeeee;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.12);
+
+  padding: 10px;
+
+  animation: dropdownOpen 0.15s ease;
+}
+
+@keyframes dropdownOpen {
+
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   DROPDOWN USER
+========================================================= */
+
+.dropdown-user {
+  display: flex;
+  align-items: center;
+
+  padding: 10px;
+}
+
+.dropdown-user img {
+  width: 42px;
+  height: 42px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  margin-right: 10px;
+}
+
+.dropdown-user div {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-user strong {
+  font-size: 14px;
+
+  color: #222;
+}
+
+.dropdown-user span {
+  font-size: 12px;
+
+  color: #888;
+
+  margin-top: 3px;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.dropdown-divider {
+  height: 1px;
+
+  background: #eeeeee;
+
+  margin: 5px 0;
+}
+
+
+/* =========================================================
+   DROPDOWN ITEM
+========================================================= */
+
+.dropdown-item {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 11px 10px;
+
+  border: none;
+
+  background: transparent;
+
+  border-radius: 6px;
+
+  color: #444;
+
+  font-size: 14px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  &:hover {
+    background: #f5f6f8;
+  }
+
+  i {
+    font-size: 19px;
+
+    color: #666;
+  }
+}
+
+
+/* LOGOUT ITEM */
+
+.logout-item {
+  color: #dc3545;
+
+  i {
+    color: #dc3545;
+  }
+
+  &:hover {
+    background: #fff1f2;
+  }
+}
+
+
+/* =========================================================
+   POWER BUTTON
+========================================================= */
+
+.logout-button {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 10px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #666;
+
+  font-size: 22px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  &:hover {
+    background: #fff1f2;
+
+    color: #dc3545;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .search-box {
+    width: 220px;
+  }
+
+  .profile-info {
+    display: none;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .top-header {
+    padding: 0 12px;
+  }
+
+  .brand {
+    margin-right: 10px;
+  }
+
+  .brand-logo {
+    width: 90px;
+  }
+
+  .search-box {
+    display: none;
+  }
+
+  .logout-button {
+    display: none;
+  }
+
+}
+
+
+@media (max-width: 400px) {
+
+  .menu-toggle {
+    margin-right: 5px;
+  }
+
+  .brand-logo {
+    width: 80px;
+  }
+
+}
