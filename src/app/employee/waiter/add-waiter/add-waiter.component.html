@@ -1,0 +1,206 @@
+<div class="page-header">
+
+  <h3 class="page-title">
+    Add Waiter
+  </h3>
+
+  <nav aria-label="breadcrumb">
+
+    <ol class="breadcrumb">
+
+      <li class="breadcrumb-item">
+        <a routerLink="/dashboard">
+          Dashboard
+        </a>
+      </li>
+
+      <li
+        class="breadcrumb-item active"
+        aria-current="page"
+      >
+        Add Waiter
+      </li>
+
+    </ol>
+
+  </nav>
+
+</div>
+
+
+<div class="row">
+
+  <div class="col-md-12 grid-margin stretch-card">
+
+    <div class="card">
+
+      <div class="card-body">
+
+        <h4 class="card-title">
+          Waiter Information
+        </h4>
+
+
+        <form
+          class="forms-sample"
+          (ngSubmit)="submit()"
+        >
+
+          <!-- WAITER NAME -->
+
+          <div class="form-group row">
+
+            <label
+              for="waitername"
+              class="col-sm-3 col-form-label"
+            >
+              Name
+            </label>
+
+            <div class="col-sm-9">
+
+              <input
+                type="text"
+                class="form-control"
+                id="waitername"
+                name="waitername"
+                [(ngModel)]="waiter.waitername"
+                placeholder="Employee Name"
+              >
+
+              @if (errors.waitername) {
+
+                <span class="error">
+                  {{ errors.waitername }}
+                </span>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- DESIGNATION -->
+
+          <div class="form-group row">
+
+            <label
+              for="designation"
+              class="col-sm-3 col-form-label"
+            >
+              Designation
+            </label>
+
+            <div class="col-sm-9">
+
+              <input
+                type="text"
+                class="form-control"
+                id="designation"
+                name="designation"
+                [(ngModel)]="waiter.designation"
+                placeholder="Position"
+              >
+
+              @if (errors.designation) {
+
+                <span class="error">
+                  {{ errors.designation }}
+                </span>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- MOBILE -->
+
+          <div class="form-group row">
+
+            <label
+              for="mobile"
+              class="col-sm-3 col-form-label"
+            >
+              Mobile Number
+            </label>
+
+            <div class="col-sm-9">
+
+              <input
+                type="text"
+                class="form-control"
+                id="mobile"
+                name="mobile"
+                [(ngModel)]="waiter.mobile"
+                placeholder="Mobile Number"
+              >
+
+              @if (errors.mobile) {
+
+                <span class="error">
+                  {{ errors.mobile }}
+                </span>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- DESCRIPTION -->
+
+          <div class="form-group row">
+
+            <label
+              for="description"
+              class="col-sm-3 col-form-label"
+            >
+              Description
+            </label>
+
+            <div class="col-sm-9">
+
+              <input
+                type="text"
+                class="form-control"
+                id="description"
+                name="description"
+                [(ngModel)]="waiter.description"
+                placeholder="Description"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- BUTTONS -->
+
+          <button
+            type="submit"
+            class="btn btn-gradient-primary me-2"
+          >
+            Submit
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-light"
+            routerLink="/viewWaiter"
+          >
+            Cancel
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

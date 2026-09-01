@@ -61,7 +61,31 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./userPages/user-list/user-list.component')
             .then(m => m.UserListComponent)
-      }
+      },
+      {
+  path: 'viewWaiter',
+  loadComponent: () =>
+    import('./employee/waiter/view-waiter/view-waiter.component')
+      .then(m => m.ViewWaiterComponent)
+},
+{
+  path: 'addWaiter',
+  loadComponent: () =>
+    import('./employee/waiter/add-waiter/add-waiter.component')
+      .then(m => m.AddWaiterComponent)
+},
+{
+  path: 'viewDelivery',
+  loadComponent: () =>
+    import('./employee/delivery/view-delivery/view-delivery.component')
+      .then(m => m.ViewDeliveryComponent)
+},
+{
+  path: 'addDelivery',
+  loadComponent: () =>
+    import('./employee/delivery/add-delivery/add-delivery.component')
+      .then(m => m.AddDeliveryComponent)
+},
 
     ]
   }

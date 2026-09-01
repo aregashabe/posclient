@@ -1,0 +1,143 @@
+<div class="page-header">
+
+  <h3 class="page-title">
+    Add Delivery
+  </h3>
+
+  <nav aria-label="breadcrumb">
+
+    <ol class="breadcrumb">
+
+      <li class="breadcrumb-item">
+        <a routerLink="/dashboard">
+          Dashboard
+        </a>
+      </li>
+
+      <li
+        class="breadcrumb-item active"
+        aria-current="page"
+      >
+        Add Delivery
+      </li>
+
+    </ol>
+
+  </nav>
+
+</div>
+
+
+<div class="row">
+
+  <div class="col-md-12 grid-margin stretch-card">
+
+    <div class="card">
+
+      <div class="card-body">
+
+        <h4 class="card-title">
+          Delivery Person Information
+        </h4>
+
+        <form
+          class="forms-sample"
+          (ngSubmit)="submit()"
+        >
+
+          <!-- DELIVERY NAME -->
+
+          <div class="form-group row">
+
+            <label
+              for="dliveryname"
+              class="col-sm-3 col-form-label"
+            >
+              Name
+            </label>
+
+            <div class="col-sm-9">
+
+              <input
+                type="text"
+                class="form-control"
+                id="dliveryname"
+                name="dliveryname"
+                [(ngModel)]="delivery.dliveryname"
+                placeholder="Delivery Name"
+              >
+
+              @if (errors.dliveryname) {
+
+                <span class="error">
+                  {{ errors.dliveryname }}
+                </span>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- MOBILE NUMBER -->
+
+          <div class="form-group row">
+
+            <label
+              for="deliverymobile"
+              class="col-sm-3 col-form-label"
+            >
+              Mobile Number
+            </label>
+
+            <div class="col-sm-9">
+
+              <input
+                type="text"
+                class="form-control"
+                id="deliverymobile"
+                name="deliverymobile"
+                [(ngModel)]="delivery.deliverymobile"
+                placeholder="Mobile Number"
+              >
+
+              @if (errors.deliverymobile) {
+
+                <span class="error">
+                  {{ errors.deliverymobile }}
+                </span>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- BUTTONS -->
+
+          <button
+            type="submit"
+            class="btn btn-gradient-primary me-2"
+          >
+            Submit
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-light"
+            routerLink="/viewDelivery"
+          >
+            Cancel
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

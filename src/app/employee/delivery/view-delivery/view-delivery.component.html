@@ -1,0 +1,92 @@
+<div class="card">
+
+  <div class="card-body">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+      <h4 class="card-title">
+        Delivery Person List
+      </h4>
+
+      <a
+        routerLink="/addDelivery"
+        class="btn btn-success"
+      >
+        Add +
+      </a>
+
+    </div>
+
+    <div class="table-responsive">
+
+      <table class="table table-hover">
+
+        <thead>
+          <tr>
+            <th>Delivery Name</th>
+            <th>Mobile Number</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          @for (delivery of deliveries; track delivery.id) {
+
+            <tr>
+
+              <td>
+                {{ delivery.dliveryname }}
+              </td>
+
+              <td>
+                {{ delivery.deliverymobile }}
+              </td>
+
+              <td>
+
+                <a
+                  [routerLink]="['/editDelivery', delivery.id]"
+                  class="btn btn-primary btn-sm me-2"
+                >
+                  Edit
+                </a>
+
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                  (click)="deleteDelivery(delivery.id)"
+                >
+                  Delete
+                </button>
+
+              </td>
+
+            </tr>
+
+          }
+
+          @if (deliveries.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="3"
+                class="text-center"
+              >
+                No delivery persons found.
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

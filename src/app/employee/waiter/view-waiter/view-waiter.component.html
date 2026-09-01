@@ -1,0 +1,97 @@
+<div class="card">
+
+  <div class="card-body">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+      <h4 class="card-title">
+        Waiter List
+      </h4>
+
+      <a
+        routerLink="/addWaiter"
+        class="btn btn-success"
+      >
+        Add +
+      </a>
+
+    </div>
+
+    <div class="table-responsive">
+
+      <table class="table table-hover">
+
+        <thead>
+          <tr>
+            <th>Waiter Name</th>
+            <th>Designation</th>
+            <th>Mobile Number</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          @for (waiter of waiters; track waiter.id) {
+
+            <tr>
+
+              <td>
+                {{ waiter.waitername }}
+              </td>
+
+              <td>
+                {{ waiter.designation }}
+              </td>
+
+              <td>
+                {{ waiter.mobile }}
+              </td>
+
+              <td>
+                {{ waiter.description }}
+              </td>
+
+              <td>
+
+                <a
+                  [routerLink]="['/editWaiter', waiter.id]"
+                  class="btn btn-primary btn-sm me-2"
+                >
+                  Edit
+                </a>
+
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                  (click)="deleteWaiter(waiter.id)"
+                >
+                  Delete
+                </button>
+
+              </td>
+
+            </tr>
+
+          }
+
+          @if (waiters.length === 0) {
+
+            <tr>
+              <td colspan="5" class="text-center">
+                No waiters found.
+              </td>
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
