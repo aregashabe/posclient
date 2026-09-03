@@ -1,0 +1,171 @@
+<div class="page-header">
+
+  <h3 class="page-title">
+    Add Category
+  </h3>
+
+  <nav aria-label="breadcrumb">
+
+    <ol class="breadcrumb">
+
+      <li class="breadcrumb-item">
+        <a routerLink="/dashboard">
+          Dashboard
+        </a>
+      </li>
+
+      <li
+        class="breadcrumb-item active"
+        aria-current="page"
+      >
+        Add Category
+      </li>
+
+    </ol>
+
+  </nav>
+
+</div>
+
+
+<div class="row">
+
+  <div class="col-md-12 grid-margin stretch-card">
+
+    <div class="card">
+
+      <div class="card-body">
+
+        <h4 class="card-title">
+          Category Information
+        </h4>
+
+
+        <form
+          class="forms-sample"
+          (ngSubmit)="submit()"
+        >
+
+
+          <!-- ========================= -->
+          <!-- CATEGORY NAME -->
+          <!-- ========================= -->
+
+          <div class="form-group row">
+
+            <label
+              for="categoryname"
+              class="col-sm-3 col-form-label"
+            >
+              Category Name
+            </label>
+
+
+            <div class="col-sm-9">
+
+              <input
+                type="text"
+                class="form-control"
+                id="categoryname"
+                name="categoryname"
+                [(ngModel)]="category.categoryName"
+                placeholder="Enter category name"
+              >
+
+
+              @if (errors.categoryName) {
+
+                <span class="error">
+                  {{ errors.categoryName }}
+                </span>
+
+              }
+
+            </div>
+
+          </div>
+
+
+
+          <!-- ========================= -->
+          <!-- DESCRIPTION -->
+          <!-- ========================= -->
+
+          <div class="form-group row">
+
+            <label
+              for="description"
+              class="col-sm-3 col-form-label"
+            >
+              Description
+            </label>
+
+
+            <div class="col-sm-9">
+
+              <textarea
+                class="form-control"
+                id="description"
+                name="description"
+                [(ngModel)]="category.description"
+                placeholder="Enter category description"
+                rows="4"
+              ></textarea>
+
+
+              @if (errors.description) {
+
+                <span class="error">
+                  {{ errors.description }}
+                </span>
+
+              }
+
+            </div>
+
+          </div>
+
+
+
+          <!-- ========================= -->
+          <!-- BUTTONS -->
+          <!-- ========================= -->
+
+          <div class="mt-3">
+
+            <button
+              type="submit"
+              class="btn btn-gradient-primary me-2"
+              [disabled]="isSubmitting"
+            >
+
+              @if (isSubmitting) {
+                Submitting...
+              } @else {
+                Submit
+              }
+
+            </button>
+
+
+            <button
+              type="button"
+              class="btn btn-light"
+              routerLink="/viewfoodcategory"
+              [disabled]="isSubmitting"
+            >
+              Cancel
+            </button>
+
+          </div>
+
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

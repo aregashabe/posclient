@@ -1,18 +1,22 @@
-<h2>Waiter list</h2>
-
+<h2>Category list</h2>
 <a
-  routerLink="/addWaiter"
+  routerLink="/addfoodcategory"
   class="btn btn-success"
->
-  Add +
-</a>
-<a
-  routerLink="/addWaiter"
+      >
+        Add +
+      </a>
+<button
+  class="btn btn-import"
+      >
+        import food catagory
+    </button>
+      <button type="button"
+      class="btn btn-export"
+ 
   class="btn btn-success"
->
-  Add +
-</a>
-
+      >
+      Export food catagory
+  </button>
 <table
   mat-table
   [dataSource]="dataSource"
@@ -20,48 +24,49 @@
   class="mat-elevation-z8"
 >
 
-  <!-- deliveryName -->
-  <ng-container matColumnDef="deliveryName">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
 
     <th
       mat-header-cell
       *matHeaderCellDef
       mat-sort-header
     >
-      
+      Name
     </th>
 
     <td
       mat-cell
       *matCellDef="let row"
     >
-      {{ row.deliveryName}}
+      {{ row.categoryName }}
     </td>
 
   </ng-container>
 
-  <!-- mobileNumber -->
-  <ng-container matColumnDef="mobileNumber">
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
 
     <th
       mat-header-cell
       *matHeaderCellDef
       mat-sort-header
     >
-      mobileNumber
+      Description
     </th>
 
     <td
       mat-cell
       *matCellDef="let row"
     >
-      {{ row.mobileNumber}}
+      {{ row.description }}
     </td>
 
   </ng-container>
 
 
-  <!-- Actions -->
+  <!-- Actions Column -->
   <ng-container matColumnDef="actions">
 
     <th
@@ -76,17 +81,11 @@
       *matCellDef="let row"
     >
 
-      <button
-        type="button"
-        class="btn btn-primary btn-sm"
-      >
+      <button>
         Edit
       </button>
 
-      <button
-        type="button"
-        class="btn btn-danger btn-sm"
-      >
+      <button>
         Delete
       </button>
 
@@ -95,14 +94,14 @@
   </ng-container>
 
 
-  <!-- Header -->
+  <!-- Header Row -->
   <tr
     mat-header-row
     *matHeaderRowDef="displayedColumns"
   ></tr>
 
 
-  <!-- Rows -->
+  <!-- Data Row -->
   <tr
     mat-row
     *matRowDef="let row; columns: displayedColumns;"
@@ -113,5 +112,6 @@
 
 <mat-paginator
   [pageSizeOptions]="[10, 25, 50]"
-  showFirstLastButtons>
+  showFirstLastButtons
+>
 </mat-paginator>

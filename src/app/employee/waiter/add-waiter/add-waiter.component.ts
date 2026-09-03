@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
+import { WaiterService } from '../../../services/waiter.service';
+
 @Component({
   selector: 'app-add-waiter',
   standalone: true,
@@ -29,7 +31,12 @@ export class AddWaiterComponent {
     mobile: ''
   };
 
-  constructor(private router: Router) {}
+  isLoading = false;
+
+  constructor(
+    private router: Router,
+    private waiterService: WaiterService
+  ) {}
 
   validateForm(): boolean {
 
@@ -76,11 +83,29 @@ export class AddWaiterComponent {
       return;
     }
 
-    console.log('Waiter:', this.waiter);
+    console.log('WAITer TO SAVE:', this.waiter);
 
-    // API will be added in the next step.
-    // After successful API request:
-    this.router.navigate(['/viewWaiter']);
+    this.isLoading = true;
+
+    this.waiterService.addWaiter(this.waiter).subscribe({
+
+      next: (response) => {
+
+        console.log('WAITER SAVED:', response);
+
+        this.isLoading = false;
+
+        this.router.navigate(['/viewWaiter']);
+      },
+
+      error: (error) => {
+
+        console.error('ADD WAITER ERROR:', error);
+
+        this.isLoading = false;
+
+      }
+
+    });
   }
-
 }

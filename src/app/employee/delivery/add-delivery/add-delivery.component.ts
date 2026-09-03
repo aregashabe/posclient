@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { DeliveryService } from '../../../services/delivery.service';
 
 @Component({
   selector: 'app-add-delivery',
@@ -17,41 +18,46 @@ import { Router, RouterLink } from '@angular/router';
 export class AddDeliveryComponent {
 
   delivery = {
-    dliveryname: '',
-    deliverymobile: ''
+    deliveryName: '',
+    deliveryMobile: ''
   };
 
   errors = {
-    dliveryname: '',
-    deliverymobile: ''
+    deliveryName: '',
+    deliveryMobile: ''
   };
 
-  constructor(private router: Router) {}
+  isSubmitting = false;
+
+  constructor(
+    private router: Router,
+    private deliveryService: DeliveryService
+  ) {}
 
   validateForm(): boolean {
 
     this.errors = {
-      dliveryname: '',
-      deliverymobile: ''
+      deliveryName: '',
+      deliveryMobile: ''
     };
 
     let valid = true;
 
     // Delivery name
-    if (!this.delivery.dliveryname.trim()) {
-      this.errors.dliveryname = 'Delivery Name is required';
+    if (!this.delivery.deliveryName.trim()) {
+      this.errors.deliveryName = 'Delivery Name is required';
       valid = false;
     }
 
     // Mobile number
-    if (!this.delivery.deliverymobile.trim()) {
+    if (!this.delivery.deliveryMobile.trim()) {
 
-      this.errors.deliverymobile = 'Mobile Number is required';
+      this.errors.deliveryMobile = 'Mobile Number is required';
       valid = false;
 
-    } else if (!/^\d+$/.test(this.delivery.deliverymobile)) {
+    } else if (!/^\d+$/.test(this.delivery.deliveryMobile)) {
 
-      this.errors.deliverymobile =
+      this.errors.deliveryMobile =
         'Only numbers are allowed in the mobile number field';
 
       valid = false;
@@ -66,10 +72,29 @@ export class AddDeliveryComponent {
       return;
     }
 
-    console.log('Delivery:', this.delivery);
+    this.isSubmitting = true;
 
-    // API will be connected later.
-    this.router.navigate(['/viewDelivery']);
+    console.log('Sending delivery:', this.delivery);
+
+    this.deliveryService.addDelivery(this.delivery).subscribe({
+
+      next: (response) => {
+
+        console.log('ADD DELIVERY RESPONSE:', response);
+
+        this.isSubmitting = false;
+
+        // Go back to delivery list
+        this.router.navigate(['/viewDelivery']);
+      },
+
+      error: (error) => {
+
+        console.error('ADD DELIVERY ERROR:', error);
+
+        this.isSubmitting = false;
+      }
+
+    });
   }
-
 }

@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { adminGuard } from './guards/admin.guard';
+import { EditDeliveryComponent }
+  from './employee/delivery/edit-delivery/edit-delivery.component';
 
 export const routes: Routes = [
 
@@ -39,9 +41,9 @@ export const routes: Routes = [
 
       // CATEGORY
       {
-        path: 'viewingredientfoodcategory',
+        path: 'viewfoodcategory',
         loadComponent: () =>
-          import('./category/view-category/view-category.component')
+          import('./master/foodcatagory/view-category/view-category.component')
             .then(m => m.ViewCategoryComponent)
       },
 
@@ -86,7 +88,22 @@ export const routes: Routes = [
     import('./employee/delivery/add-delivery/add-delivery.component')
       .then(m => m.AddDeliveryComponent)
 },
-
+{
+    path: 'editDelivery/:id',
+    component: EditDeliveryComponent
+  },
+  {
+    path:'addfoodcategory',
+    loadComponent: () =>
+      import('./master/foodcatagory/addcatagory/addcatagory.component')
+        .then(m => m.AddcatagoryComponent)
+  },
+  {
+    path: 'viewfoodmenu',
+    loadComponent: () =>
+      import('./master/foodmenu/viewfoodmenu/viewfoodmenu.component')
+        .then(m => m.ViewfoodmenuComponent)
+  }
     ]
   }
 

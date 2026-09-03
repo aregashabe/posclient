@@ -1,5 +1,12 @@
 export interface Category {
-    id: number;
-    name: string;
-    description: string;
+  id: number;
+  categoryName: string;
+  description: string;
+  foodmenus: any[];
+  ingredients: any[];
+}
+
+export interface CreateCategory {
+  categoryName: string;
+  description: string;
 }

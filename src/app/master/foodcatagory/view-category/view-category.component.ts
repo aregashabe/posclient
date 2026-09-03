@@ -1,5 +1,4 @@
-import { Component, OnInit, inject, viewChild, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, viewChild, effect, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import {
@@ -17,67 +16,66 @@ import {
   MatSort
 } from '@angular/material/sort';
 
-import {
-  WaiterService,
-  Waiter
-} from '../../../services/waiter.service';
+import { Category } from '../../../models/category';
+import { CategoryService } from '../../../services/category.service';
 
 @Component({
-  selector: 'app-view-waiter',
-  standalone: true,
+  selector: 'app-view-category',
 
   imports: [
-    CommonModule,
     RouterLink,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule
   ],
 
-  templateUrl: './view-waiter.component.html',
-  styleUrl: './view-waiter.component.scss'
+  templateUrl: './view-category.component.html',
+  styleUrl: './view-category.component.scss',
 })
-export class ViewWaiterComponent implements OnInit {
+export class ViewCategoryComponent implements OnInit {
 
-  readonly waiterService = inject(WaiterService);
+  readonly categoryService = inject(CategoryService);
 
   displayedColumns = [
     'name',
-    'designation',
-    'mobileNumber',
     'description',
     'actions'
   ];
 
-  dataSource = new MatTableDataSource<Waiter>();
+  dataSource = new MatTableDataSource<Category>();
 
   readonly paginator = viewChild.required(MatPaginator);
+
   readonly sort = viewChild.required(MatSort);
+
 
   constructor() {
 
     effect(() => {
 
       this.dataSource.paginator = this.paginator();
+
       this.dataSource.sort = this.sort();
 
     });
 
   }
 
+
   ngOnInit(): void {
-    this.loadWaiters();
+
+    this.loadCategories();
+
   }
 
-  loadWaiters(): void {
 
-    console.log('LOAD WAITERS CALLED');
+  loadCategories(): void {
 
-    this.waiterService.getWaiters().subscribe({
+    this.categoryService.getCategories().subscribe({
 
       next: (data) => {
 
-        console.log('API DATA:', data);
+        console.log('CATEGORY DATA:', data);
 
         this.dataSource.data = data;
 
@@ -85,7 +83,7 @@ export class ViewWaiterComponent implements OnInit {
 
       error: (error) => {
 
-        console.error('GET WAITERS ERROR:', error);
+        console.error('CATEGORY ERROR:', error);
 
       }
 
