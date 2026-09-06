@@ -3,86 +3,129 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { FoodmenuService } from '../../../services/foodmenu.service';
+import { Foodmenu } from '../../../models/foodmenu';
 
 @Component({
   selector: 'app-addfoodmenu',
-  imports: [CommonModule, FormsModule, RouterLink],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink
+  ],
   templateUrl: './addfoodmenu.component.html',
-  styleUrl: './addfoodmenu.component.scss',
+  styleUrl: './addfoodmenu.component.scss'
 })
 export class AddfoodmenuComponent {
-  foodmenu = {
-    foodName: '',
-    foodCategory: '',
+
+  foodmenu: Foodmenu = {
+    foodmenuName: '',
+    catagoryId: 0,
+    foodingredientId: 0,
     salesPrice: 0,
-    vat: 0,
+    vatId: 0,
+    description: '',
+    vegItem: false,
+    beverage: false,
+    bar: false,
     photo: ''
   };
-  
+
   errors = {
-    foodName: '',
-    foodCategory: '',
+    foodmenuName: '',
+    catagoryId: '',
+    foodingredientId: '',
     salesPrice: '',
-    vat: '',
-    photo: ''
+    vatId: '',
+    description: ''
   };
-  
+
   isSubmitting = false;
+
   constructor(
     private router: Router,
     private foodmenuService: FoodmenuService
   ) {}
-  
+
   validateForm(): boolean {
+
     this.errors = {
-      foodName: '',
-      foodCategory: '',
+      foodmenuName: '',
+      catagoryId: '',
+      foodingredientId: '',
       salesPrice: '',
-      vat: '',
-      photo: ''
+      vatId: '',
+      description: ''
     };
 
     let isValid = true;
-    if (!this.foodmenu.foodName) {
-      this.errors.foodName = 'Food name is required';
+
+    // Food name
+    if (!this.foodmenu.foodmenuName.trim()) {
+      this.errors.foodmenuName = 'Food name is required';
       isValid = false;
     }
-    if (!this.foodmenu.foodCategory) {
-      this.errors.foodCategory = 'Food category is required';
+
+    // Category
+    if (this.foodmenu.catagoryId <= 0) {
+      this.errors.catagoryId = 'Food category is required';
       isValid = false;
     }
+
+    // Ingredient
+    if (this.foodmenu.foodingredientId <= 0) {
+      this.errors.foodingredientId = 'Ingredient is required';
+      isValid = false;
+    }
+
+    // Sales price
     if (this.foodmenu.salesPrice <= 0) {
-      this.errors.salesPrice = 'Sales price must be a positive number';
+      this.errors.salesPrice = 'Sales price must be greater than 0';
       isValid = false;
     }
-    if (this.foodmenu.vat < 0) {
-      this.errors.vat = 'VAT cannot be negative';
-      isValid = false;
-    }
-    if (!this.foodmenu.photo) {
-      this.errors.photo = 'Photo is required';
+
+    // VAT
+    if (this.foodmenu.vatId <= 0) {
+      this.errors.vatId = 'VAT is required';
       isValid = false;
     }
 
     return isValid;
-
   }
+
   submit(): void {
+
     if (!this.validateForm()) {
       return;
     }
-    
+
     this.isSubmitting = true;
+
+    // Send the Foodmenu object directly to the API
     this.foodmenuService.addFoodmenu(this.foodmenu).subscribe({
+
       next: (response) => {
-        console.log('Food menu added successfully:', response);
+
+        console.log(
+          'Food menu added successfully:',
+          response
+        );
+
         this.isSubmitting = false;
+
         this.router.navigate(['/viewfoodmenu']);
       },
+
       error: (error) => {
-        console.error('Error adding food menu:', error);
+
+        console.error(
+          'Error adding food menu:',
+          error
+        );
+
         this.isSubmitting = false;
       }
+
     });
   }
-  }
+}

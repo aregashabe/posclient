@@ -1,0 +1,148 @@
+<div class="container mt-4">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2>VAT List</h2>
+
+    <a
+      routerLink="/addVat"
+      class="btn btn-success"
+    >
+      Add VAT +
+    </a>
+
+  </div>
+
+
+  <!-- VAT Table -->
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="mat-elevation-z8 w-100"
+  >
+
+    <!-- ID -->
+    <ng-container matColumnDef="id">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        ID
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let vat"
+      >
+        {{ vat.id }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- VAT Name -->
+    <ng-container matColumnDef="vatName">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        VAT Name
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let vat"
+      >
+        {{ vat.vatName }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Percentage -->
+    <ng-container matColumnDef="percentage">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Percentage
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let vat"
+      >
+        {{ vat.percentage }}%
+      </td>
+
+    </ng-container>
+
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        Actions
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let vat"
+      >
+       <button
+          class="btn btn-danger btn-sm"
+          type="button"
+          (click)="updateVat(vat.id)"
+        >
+          Edit
+        </button>
+
+        <button
+          class="btn btn-danger btn-sm"
+          type="button"
+          (click)="deleteVat(vat.id)"
+        >
+          Delete
+        </button>
+
+      </td>
+
+    </ng-container>
+
+
+    <!-- Header Row -->
+    <tr
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+    ></tr>
+
+
+    <!-- Data Row -->
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+
+  </table>
+
+
+  <!-- Paginator -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+
+</div>
+

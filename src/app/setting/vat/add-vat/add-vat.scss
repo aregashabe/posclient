@@ -1,0 +1,159 @@
+.container {
+  max-width: 700px;
+  margin: 30px auto;
+}
+
+/* Header */
+.container > .d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px !important;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* Form */
+.container form {
+  width: 100%;
+  padding: 30px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+/* VAT Name and Percentage */
+.container form > .mb-3 {
+  width: 100%;
+  margin: 0 0 30px 0 !important;
+  padding: 0;
+}
+
+/* Label */
+.container form .form-label {
+  display: block;
+  width: 100%;
+  margin: 0 0 10px 0 !important;
+
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #333;
+}
+
+/* Inputs */
+.container form .form-control {
+  display: block;
+  width: 100%;
+  height: 48px;
+
+  margin: 0 !important;
+  padding: 10px 14px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+
+  font-size: 15px;
+  line-height: 26px;
+
+  background: #fff;
+}
+
+.container form .form-control:focus {
+  border-color: #198754;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.15);
+}
+
+/* Placeholder */
+.container form .form-control::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+/* Validation message */
+.container form .text-danger {
+  display: block;
+  margin: 8px 0 0 0 !important;
+
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* Button container */
+.container form > .mt-4 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin: 5px 0 0 0 !important;
+  padding: 0;
+}
+
+/* Buttons */
+.container form > .mt-4 button {
+  display: inline-block;
+
+  width: 100px;
+  height: 42px;
+
+  margin: 0 !important;
+  padding: 8px 15px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+/* Back button */
+.container > .d-flex > button {
+  min-width: 90px;
+  height: 40px;
+  margin: 0;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .container {
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  .container form {
+    padding: 20px;
+  }
+
+  .container > .d-flex {
+    margin-bottom: 25px !important;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .container form > .mb-3 {
+    margin-bottom: 25px !important;
+  }
+
+  .container form > .mt-4 {
+    gap: 12px;
+  }
+
+  .container form > .mt-4 button {
+    width: 95px;
+  }
+}

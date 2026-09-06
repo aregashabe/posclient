@@ -1,0 +1,99 @@
+<nav class="sidebar">
+
+  <ul class="nav">
+
+    <!-- DASHBOARD -->
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        routerLink="/cashier-dashboard"
+        routerLinkActive="active"
+      >
+        <span class="menu-title">Dashboard</span>
+        <i class="mdi mdi-home menu-icon"></i>
+      </a>
+    </li>
+
+
+    <!-- POS -->
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [routerLink]="isOpeningBalanceComplete ? '/pos' : '/openningbalance'"
+      >
+        <span class="menu-title">POS</span>
+        <i class="mdi mdi-contacts menu-icon"></i>
+      </a>
+    </li>
+
+
+    <!-- ORDERS -->
+    <li class="nav-item">
+
+      <a
+        class="nav-link"
+        (click)="toggleMenu('orders')"
+      >
+        <span class="menu-title">Orders</span>
+
+        <i
+          class="menu-arrow"
+          [class.open]="isOpen('orders')"
+        ></i>
+
+        <i class="mdi mdi-cart menu-icon"></i>
+      </a>
+
+      @if (isOpen('orders')) {
+
+        <ul class="sub-menu">
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/posorder"
+              routerLinkActive="active"
+            >
+              Pos Order
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/paidorders"
+              routerLinkActive="active"
+            >
+              Paid Order
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/cancelorders"
+              routerLinkActive="active"
+            >
+              Cancel Order
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/runningorders"
+              routerLinkActive="active"
+            >
+              Running Order
+            </a>
+          </li>
+
+        </ul>
+
+      }
+
+    </li>
+
+  </ul>
+
+</nav>

@@ -1,1 +1,272 @@
-<p>addfoodmenu works!</p>
+<div class="container mt-4">
+
+  <div class="card shadow">
+
+    <div class="card-header">
+      <h4 class="mb-0">Add Food Menu</h4>
+    </div>
+
+    <div class="card-body">
+
+      <form (ngSubmit)="submit()">
+
+        <!-- Food Name -->
+        <div class="mb-3">
+          <label for="foodmenuName" class="form-label">
+            Food Name
+          </label>
+
+          <input
+            type="text"
+            id="foodmenuName"
+            name="foodmenuName"
+            class="form-control"
+            [(ngModel)]="foodmenu.foodmenuName"
+            placeholder="Enter food name"
+          >
+
+          <div
+            class="text-danger mt-1"
+            *ngIf="errors.foodmenuName"
+          >
+            {{ errors.foodmenuName }}
+          </div>
+        </div>
+
+
+        <!-- Category ID -->
+        <div class="mb-3">
+          <label for="catagoryId" class="form-label">
+            Food Category ID
+          </label>
+
+          <input
+            type="number"
+            id="catagoryId"
+            name="catagoryId"
+            class="form-control"
+            [(ngModel)]="foodmenu.catagoryId"
+            min="1"
+            placeholder="Enter category ID"
+          >
+
+          <div
+            class="text-danger mt-1"
+            *ngIf="errors.catagoryId"
+          >
+            {{ errors.catagoryId }}
+          </div>
+        </div>
+
+
+        <!-- Food Ingredient ID -->
+        <div class="mb-3">
+          <label for="foodingredientId" class="form-label">
+            Food Ingredient ID
+          </label>
+
+          <input
+            type="number"
+            id="foodingredientId"
+            name="foodingredientId"
+            class="form-control"
+            [(ngModel)]="foodmenu.foodingredientId"
+            min="1"
+            placeholder="Enter ingredient ID"
+          >
+
+          <div
+            class="text-danger mt-1"
+            *ngIf="errors.foodingredientId"
+          >
+            {{ errors.foodingredientId }}
+          </div>
+        </div>
+
+
+        <!-- Sales Price -->
+        <div class="mb-3">
+          <label for="salesPrice" class="form-label">
+            Sales Price
+          </label>
+
+          <input
+            type="number"
+            id="salesPrice"
+            name="salesPrice"
+            class="form-control"
+            [(ngModel)]="foodmenu.salesPrice"
+            min="0"
+            placeholder="Enter sales price"
+          >
+
+          <div
+            class="text-danger mt-1"
+            *ngIf="errors.salesPrice"
+          >
+            {{ errors.salesPrice }}
+          </div>
+        </div>
+
+
+        <!-- VAT ID -->
+        <div class="mb-3">
+          <label for="vatId" class="form-label">
+            VAT ID
+          </label>
+
+          <input
+            type="number"
+            id="vatId"
+            name="vatId"
+            class="form-control"
+            [(ngModel)]="foodmenu.vatId"
+            min="1"
+            placeholder="Enter VAT ID"
+          >
+
+          <div
+            class="text-danger mt-1"
+            *ngIf="errors.vatId"
+          >
+            {{ errors.vatId }}
+          </div>
+        </div>
+
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label for="description" class="form-label">
+            Description
+          </label>
+
+          <textarea
+            id="description"
+            name="description"
+            class="form-control"
+            [(ngModel)]="foodmenu.description"
+            placeholder="Enter description"
+            rows="3"
+          ></textarea>
+        </div>
+
+
+        <!-- Vegetarian Item -->
+        <div class="form-check mb-3">
+
+          <input
+            type="checkbox"
+            id="vegItem"
+            name="vegItem"
+            class="form-check-input"
+            [(ngModel)]="foodmenu.vegItem"
+          >
+
+          <label
+            for="vegItem"
+            class="form-check-label"
+          >
+            Vegetarian Item
+          </label>
+
+        </div>
+
+
+        <!-- Beverage -->
+        <div class="form-check mb-3">
+
+          <input
+            type="checkbox"
+            id="beverage"
+            name="beverage"
+            class="form-check-input"
+            [(ngModel)]="foodmenu.beverage"
+          >
+
+          <label
+            for="beverage"
+            class="form-check-label"
+          >
+            Beverage
+          </label>
+
+        </div>
+
+
+        <!-- Bar -->
+        <div class="form-check mb-3">
+
+          <input
+            type="checkbox"
+            id="bar"
+            name="bar"
+            class="form-check-input"
+            [(ngModel)]="foodmenu.bar"
+          >
+
+          <label
+            for="bar"
+            class="form-check-label"
+          >
+            Bar
+          </label>
+
+        </div>
+
+
+        <!-- Photo -->
+        <div class="mb-3">
+
+          <label for="photo" class="form-label">
+            Photo URL
+          </label>
+
+          <input
+            type="text"
+            id="photo"
+            name="photo"
+            class="form-control"
+            [(ngModel)]="foodmenu.photo"
+            placeholder="Enter photo URL"
+          >
+
+        </div>
+
+
+        <!-- Buttons -->
+        <div class="d-flex gap-2">
+
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="isSubmitting"
+          >
+
+            <span *ngIf="!isSubmitting">
+              Add Food
+            </span>
+
+            <span *ngIf="isSubmitting">
+              Saving...
+            </span>
+
+          </button>
+
+
+          <a
+            routerLink="/viewfoodmenu"
+            class="btn btn-secondary"
+          >
+            Cancel
+          </a>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+

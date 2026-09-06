@@ -1,0 +1,113 @@
+<div class="container mt-4">
+
+  <!-- Header -->
+  <div
+    class="d-flex justify-content-between align-items-center mb-4"
+  >
+
+    <h2>Add Ingredient Unit</h2>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()"
+    >
+      Back
+    </button>
+
+  </div>
+
+
+  <!-- Form -->
+  <form
+    [formGroup]="ingredientUnitForm"
+    (ngSubmit)="saveIngredientUnit()"
+  >
+
+    <!-- Unit Name -->
+    <div class="mb-3">
+
+      <label
+        for="unitName"
+        class="form-label"
+      >
+        Unit Name
+      </label>
+
+      <input
+        id="unitName"
+        type="text"
+        class="form-control"
+        formControlName="unitName"
+        placeholder="Enter unit name"
+      >
+
+      @if (
+        ingredientUnitForm.controls.unitName.touched &&
+        ingredientUnitForm.controls.unitName.invalid
+      ) {
+
+        <div class="text-danger mt-1">
+          Unit name is required
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- Description -->
+    <div class="mb-3">
+
+      <label
+        for="description"
+        class="form-label"
+      >
+        Description
+      </label>
+
+      <textarea
+        id="description"
+        class="form-control"
+        formControlName="description"
+        placeholder="Enter description"
+        rows="4"
+      ></textarea>
+
+      @if (
+        ingredientUnitForm.controls.description.touched &&
+        ingredientUnitForm.controls.description.invalid
+      ) {
+
+        <div class="text-danger mt-1">
+          Description is required
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- Buttons -->
+    <div class="mt-4">
+
+      <button
+        type="submit"
+        class="btn btn-success me-2"
+      >
+        Save
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

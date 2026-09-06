@@ -1,0 +1,147 @@
+<div class="container mt-4">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2>Ingredient Unit List</h2>
+
+    <a
+      routerLink="/addIngredienUnit"
+      class="btn btn-success"
+    >
+      Add Unit +
+    </a>
+
+  </div>
+
+
+  <!-- Table -->
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="mat-elevation-z8 w-100"
+  >
+
+    <!-- ID -->
+    <ng-container matColumnDef="id">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        ID
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let unit"
+      >
+        {{ unit.id }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Unit Name -->
+    <ng-container matColumnDef="unitName">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Unit Name
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let unit"
+      >
+        {{ unit.unitName }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Description -->
+    <ng-container matColumnDef="description">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        Description
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let unit"
+      >
+        {{ unit.description }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        Actions
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let unit"
+      >
+
+        <button
+          type="button"
+          class="btn btn-primary btn-sm me-2"
+          (click)="editIngredientUnit(unit)"
+        >
+          Edit
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          (click)="deleteIngredientUnit(unit.id)"
+        >
+          Delete
+        </button>
+
+      </td>
+
+    </ng-container>
+
+
+    <!-- Header Row -->
+    <tr
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+    ></tr>
+
+
+    <!-- Data Row -->
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+
+  </table>
+
+
+  <!-- Paginator -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+
+</div>

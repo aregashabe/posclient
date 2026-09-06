@@ -1,0 +1,213 @@
+<div class="container mt-4">
+
+  <div
+    class="d-flex justify-content-between align-items-center mb-3"
+  >
+
+    <h2>Ingredient List</h2>
+
+    <a
+      routerLink="/addIngredient"
+      class="btn btn-success"
+    >
+      Add Ingredient +
+    </a>
+
+  </div>
+
+
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="mat-elevation-z8 w-100"
+  >
+
+    <!-- ID -->
+    <ng-container matColumnDef="id">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        ID
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let ingredient"
+      >
+        {{ ingredient.id }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Name -->
+    <ng-container matColumnDef="name">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Name
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let ingredient"
+      >
+        {{ ingredient.name }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Category ID -->
+    <ng-container matColumnDef="categoryId">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Category ID
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let ingredient"
+      >
+        {{ ingredient.categoryId }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Ingredient Unit ID -->
+    <ng-container matColumnDef="ingredientUnitId">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Unit ID
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let ingredient"
+      >
+        {{ ingredient.ingredientUnitId }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Alert Quantity -->
+    <ng-container matColumnDef="alertQuantity">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Alert Quantity
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let ingredient"
+      >
+        {{ ingredient.alertQuantity }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Description -->
+    <ng-container matColumnDef="description">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        Description
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let ingredient"
+      >
+        {{ ingredient.description }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        Actions
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let ingredient"
+      >
+
+        <button
+          type="button"
+          class="btn btn-primary btn-sm me-2"
+          (click)="editIngredient(ingredient)"
+        >
+          Edit
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          (click)="deleteIngredient(ingredient.id)"
+        >
+          Delete
+        </button>
+
+      </td>
+
+    </ng-container>
+
+
+    <!-- Header -->
+    <tr
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+    ></tr>
+
+
+    <!-- Rows -->
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: displayedColumns
+      "
+    ></tr>
+
+  </table>
+
+
+  <!-- Paginator -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+
+</div>

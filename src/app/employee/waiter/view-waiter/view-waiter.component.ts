@@ -41,13 +41,13 @@ export class ViewWaiterComponent implements OnInit {
 
   readonly waiterService = inject(WaiterService);
 
-  displayedColumns = [
-    'name',
-    'designation',
-    'mobileNumber',
-    'description',
-    'actions'
-  ];
+ displayedColumns = [
+  'waiterName',
+  'designation',
+  'mobile',
+  'description',
+  'actions'
+];
 
   dataSource = new MatTableDataSource<Waiter>();
 

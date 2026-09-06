@@ -1,287 +1,196 @@
-<div class="page-header">
+<div class="container mt-4">
 
-  <h3 class="page-title">
-    Food Menu List
-  </h3>
+  <div class="d-flex justify-content-between align-items-center mb-3">
 
-  <nav aria-label="breadcrumb">
+    <h2>Food Menu List</h2>
 
-    <ol class="breadcrumb">
-
-      <li class="breadcrumb-item">
-        <a routerLink="/dashboard">
-          Dashboard
-        </a>
-      </li>
-
-      <li
-        class="breadcrumb-item active"
-        aria-current="page"
-      >
-        Food Menu
-      </li>
-
-    </ol>
-
-  </nav>
-
-</div>
-
-
-<!-- ========================= -->
-<!-- ACTION BUTTONS -->
-<!-- ========================= -->
-
-<div class="category-actions">
-
-  <a
-    routerLink="/addfoodmenu"
-    class="btn btn-success"
-  >
-    Add +
-  </a>
-
-  <button
-    type="button"
-    class="btn btn-import"
-  >
-    Import Food Menu
-  </button>
-
-  <button
-    type="button"
-    class="btn btn-export"
-  >
-    Export Food Menu
-  </button>
-
-</div>
-
-
-<!-- ========================= -->
-<!-- FOOD MENU TABLE -->
-<!-- ========================= -->
-
-<div class="card">
-
-  <div class="card-body">
-
-    <h4 class="card-title">
-      Food Menu
-    </h4>
-
-
-    <div class="table-responsive">
-
-      <table
-        mat-table
-        [dataSource]="dataSource"
-        matSort
-        class="mat-elevation-z8 w-100"
-      >
-
-
-        <!-- FOOD NAME -->
-
-        <ng-container matColumnDef="foodName">
-
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header
-          >
-            Food Name
-          </th>
-
-          <td
-            mat-cell
-            *matCellDef="let row"
-          >
-            {{ row.foodName }}
-          </td>
-
-        </ng-container>
-
-
-
-        <!-- FOOD CATEGORY -->
-
-        <ng-container matColumnDef="foodCategory">
-
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header
-          >
-            Food Category
-          </th>
-
-          <td
-            mat-cell
-            *matCellDef="let row"
-          >
-            {{ row.foodCategory }}
-          </td>
-
-        </ng-container>
-
-
-
-        <!-- SALES PRICE -->
-
-        <ng-container matColumnDef="salesPrice">
-
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header
-          >
-            Sales Price
-          </th>
-
-          <td
-            mat-cell
-            *matCellDef="let row"
-          >
-            {{ row.salesPrice }}
-          </td>
-
-        </ng-container>
-
-
-
-        <!-- VAT -->
-
-        <ng-container matColumnDef="vat">
-
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header
-          >
-            VAT
-          </th>
-
-          <td
-            mat-cell
-            *matCellDef="let row"
-          >
-            {{ row.vat }}
-          </td>
-
-        </ng-container>
-
-
-
-        <!-- PHOTO -->
-
-        <ng-container matColumnDef="photo">
-
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-          >
-            Photo
-          </th>
-
-          <td
-            mat-cell
-            *matCellDef="let row"
-          >
-
-            @if (row.photo) {
-
-              <img
-                [src]="row.photo"
-                alt="Food"
-                class="food-image"
-              >
-
-            } @else {
-
-              <span>
-                No Image
-              </span>
-
-            }
-
-          </td>
-
-        </ng-container>
-
-
-
-        <!-- ACTION -->
-
-        <ng-container matColumnDef="action">
-
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-          >
-            Action
-          </th>
-
-          <td
-            mat-cell
-            *matCellDef="let row"
-          >
-
-            <button
-              type="button"
-              class="btn btn-sm btn-primary me-2"
-            >
-              Edit
-            </button>
-
-            <button
-              type="button"
-              class="btn btn-sm btn-danger"
-            >
-              Delete
-            </button>
-
-          </td>
-
-        </ng-container>
-
-
-
-        <!-- HEADER -->
-
-        <tr
-          mat-header-row
-          *matHeaderRowDef="displayedColumns"
-        ></tr>
-
-
-
-        <!-- DATA -->
-
-        <tr
-          mat-row
-          *matRowDef="
-            let row;
-            columns: displayedColumns;
-          "
-        ></tr>
-
-
-      </table>
-
-    </div>
-
-
-    <!-- ========================= -->
-    <!-- PAGINATOR -->
-    <!-- ========================= -->
-
-    <mat-paginator
-      [pageSizeOptions]="[10, 25, 50]"
-      showFirstLastButtons
+    <a
+      routerLink="/addfoodmenu"
+      class="btn btn-success"
     >
-    </mat-paginator>
+      Add Food +
+    </a>
 
   </div>
+
+
+  <div class="table-responsive">
+
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      class="mat-elevation-z8 w-100"
+    >
+
+      <!-- Food Name -->
+      <ng-container matColumnDef="foodmenuName">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Food Name
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let foodmenu"
+        >
+          {{ foodmenu.foodmenuName }}
+        </td>
+
+      </ng-container>
+
+
+      <!-- Category -->
+      <ng-container matColumnDef="catagoryId">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Category
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let foodmenu"
+        >
+          {{ foodmenu.catagoryId }}
+        </td>
+
+      </ng-container>
+
+
+      <!-- Sales Price -->
+      <ng-container matColumnDef="salesPrice">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Sales Price
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let foodmenu"
+        >
+          {{ foodmenu.salesPrice }}
+        </td>
+
+      </ng-container>
+
+
+      <!-- VAT -->
+      <ng-container matColumnDef="vatId">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          VAT
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let foodmenu"
+        >
+          {{ foodmenu.vatId }}
+        </td>
+
+      </ng-container>
+
+
+      <!-- Photo -->
+      <ng-container matColumnDef="photo">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          Photo
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let foodmenu"
+        >
+
+          <img
+            *ngIf="foodmenu.photo"
+            [src]="foodmenu.photo"
+            alt="Food"
+            width="60"
+            height="60"
+            style="object-fit: cover;"
+          >
+
+          <span *ngIf="!foodmenu.photo">
+            No Photo
+          </span>
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- Action -->
+      <ng-container matColumnDef="action">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+        >
+          Action
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let foodmenu"
+        >
+
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            (click)="deleteFoodmenu(foodmenu.id)"
+          >
+            Delete
+          </button>
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- Header -->
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+      ></tr>
+
+
+      <!-- Rows -->
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns;"
+      ></tr>
+
+    </table>
+
+  </div>
+
+
+  <!-- Paginator -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
 
 </div>

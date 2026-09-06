@@ -4,13 +4,15 @@
   <app-header></app-header>
 
   <!-- SIDEBAR -->
-  <app-sidebar></app-sidebar>
+  @if (userRole === 'cashier') {
+    <app-cashier-sidebar></app-cashier-sidebar>
+  } @else {
+    <app-sidebar></app-sidebar>
+  }
 
   <!-- MAIN CONTENT -->
   <main class="main-content">
-
     <router-outlet></router-outlet>
-
   </main>
 
 </div>

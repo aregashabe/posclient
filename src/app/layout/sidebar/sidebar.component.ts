@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,7 +11,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
-  userRole: string | null = null;
+  private authService = inject(AuthService);
+
+ userRole: string = '';
 
   isOpeningBalanceComplete = false;
 
@@ -18,24 +21,88 @@ export class SidebarComponent implements OnInit {
 
   lastOpeningBalanceDate: Date | null = null;
 
-  // Keep track of which sidebar menus are open
   openMenus: { [key: string]: boolean } = {};
 
   ngOnInit(): void {
-    this.userRole = localStorage.getItem('userrole');
 
-    console.log('User role:', this.userRole);
+    this.authService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.userRole = user.role;
+
+        console.log('User role:', this.userRole);
+      },
+      error: (error) => {
+        console.error('Could not get current user:', error);
+      }
+    });
 
     this.isOpeningBalanceComplete = false;
   }
 
-  // Open/close a menu
   toggleMenu(menu: string): void {
     this.openMenus[menu] = !this.openMenus[menu];
   }
 
-  // Check whether a menu is open
   isOpen(menu: string): boolean {
     return this.openMenus[menu] === true;
+  }
+
+  isAdmin(): boolean {
+    return this.userRole?.toLowerCase() === 'admin';
+  }
+
+  isManager(): boolean {
+    return this.userRole?.toLowerCase() === 'manager';
+  }
+
+  isCashier(): boolean {
+    return this.userRole?.toLowerCase() === 'cashier';
+  }
+
+  isWaiter(): boolean {
+    return this.userRole?.toLowerCase() === 'waiter';
+  }
+
+  isDelivery(): boolean {
+    return this.userRole?.toLowerCase() === 'delivery';
+  }
+
+  canSeeEmployee(): boolean {
+    return this.isAdmin() || this.isManager();
+  }
+
+  canSeePOS(): boolean {
+    return this.isAdmin() ||
+           this.isManager() ||
+           this.isCashier() ||
+           this.isWaiter();
+  }
+
+  canSeeOrders(): boolean {
+    return this.isAdmin() ||
+           this.isManager() ||
+           this.isCashier() ||
+           this.isWaiter() ||
+           this.isDelivery();
+  }
+
+  canSeeMaster(): boolean {
+    return this.isAdmin() || this.isManager();
+  }
+
+  canSeeSettings(): boolean {
+    return this.isAdmin() || this.isManager();
+  }
+
+  canSeeInventory(): boolean {
+    return this.isAdmin() || this.isManager();
+  }
+
+  canSeeExpense(): boolean {
+    return this.isAdmin() || this.isManager();
+  }
+
+  canSeeReports(): boolean {
+    return this.isAdmin() || this.isManager();
   }
 }

@@ -1,8 +1,24 @@
+
 export interface Foodmenu {
-    id: number;
-    name: string;
-    category: string;
-    salesPrice: number;
-    vat: number;
-    photo: string;
+  id?: number;
+
+  foodmenuName: string;
+
+  catagoryId: number;
+
+  foodingredientId: number;
+
+  salesPrice: number;
+
+  vatId: number;
+
+  description: string;
+
+  vegItem: boolean;
+
+  beverage: boolean;
+
+  bar: boolean;
+
+  photo: string;
 }

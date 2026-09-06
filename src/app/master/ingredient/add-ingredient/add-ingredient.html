@@ -1,0 +1,210 @@
+<div class="container mt-4">
+
+  <div
+    class="d-flex justify-content-between align-items-center mb-4"
+  >
+
+    <h2>Add Ingredient</h2>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()"
+    >
+      Back
+    </button>
+
+  </div>
+
+
+  <form
+    [formGroup]="ingredientForm"
+    (ngSubmit)="saveIngredient()"
+  >
+
+    <!-- Name -->
+    <div class="mb-3">
+
+      <label
+        for="name"
+        class="form-label"
+      >
+        Ingredient Name
+      </label>
+
+      <input
+        id="name"
+        type="text"
+        class="form-control"
+        formControlName="name"
+        placeholder="Enter ingredient name"
+      >
+
+      @if (
+        ingredientForm.controls.name.touched &&
+        ingredientForm.controls.name.invalid
+      ) {
+
+        <div class="text-danger mt-1">
+          Ingredient name is required
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- Category ID -->
+    <div class="mb-3">
+
+      <label
+        for="categoryId"
+        class="form-label"
+      >
+        Category ID
+      </label>
+
+      <input
+        id="categoryId"
+        type="number"
+        class="form-control"
+        formControlName="categoryId"
+        min="1"
+        placeholder="Enter category ID"
+      >
+
+      @if (
+        ingredientForm.controls.categoryId.touched &&
+        ingredientForm.controls.categoryId.invalid
+      ) {
+
+        <div class="text-danger mt-1">
+          Category ID is required
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- Ingredient Unit ID -->
+    <div class="mb-3">
+
+      <label
+        for="ingredientUnitId"
+        class="form-label"
+      >
+        Ingredient Unit ID
+      </label>
+
+      <input
+        id="ingredientUnitId"
+        type="number"
+        class="form-control"
+        formControlName="ingredientUnitId"
+        min="1"
+        placeholder="Enter ingredient unit ID"
+      >
+
+      @if (
+        ingredientForm.controls.ingredientUnitId.touched &&
+        ingredientForm.controls.ingredientUnitId.invalid
+      ) {
+
+        <div class="text-danger mt-1">
+          Ingredient unit ID is required
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- Alert Quantity -->
+    <div class="mb-3">
+
+      <label
+        for="alertQuantity"
+        class="form-label"
+      >
+        Alert Quantity
+      </label>
+
+      <input
+        id="alertQuantity"
+        type="number"
+        class="form-control"
+        formControlName="alertQuantity"
+        min="0"
+        placeholder="Enter alert quantity"
+      >
+
+      @if (
+        ingredientForm.controls.alertQuantity.touched &&
+        ingredientForm.controls.alertQuantity.invalid
+      ) {
+
+        <div class="text-danger mt-1">
+          Alert quantity is required
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- Description -->
+    <div class="mb-3">
+
+      <label
+        for="description"
+        class="form-label"
+      >
+        Description
+      </label>
+
+      <textarea
+        id="description"
+        class="form-control"
+        formControlName="description"
+        placeholder="Enter description"
+        rows="4"
+      ></textarea>
+
+      @if (
+        ingredientForm.controls.description.touched &&
+        ingredientForm.controls.description.invalid
+      ) {
+
+        <div class="text-danger mt-1">
+          Description is required
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- Buttons -->
+    <div class="mt-4">
+
+      <button
+        type="submit"
+        class="btn btn-success me-2"
+      >
+        Save
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

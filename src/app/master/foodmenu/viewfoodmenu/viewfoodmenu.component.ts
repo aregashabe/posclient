@@ -5,6 +5,7 @@ import {
   effect,
   OnInit
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { RouterLink } from '@angular/router';
 
@@ -34,7 +35,8 @@ import { Foodmenu } from '../../../models/foodmenu';
     RouterLink,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    CommonModule
   ],
 
   templateUrl: './viewfoodmenu.component.html',
@@ -44,14 +46,14 @@ export class ViewfoodmenuComponent implements OnInit {
 
   readonly foodmenuService = inject(FoodmenuService);
 
-  displayedColumns = [
-    'foodName',
-    'foodCategory',
-    'salesPrice',
-    'vat',
-    'photo',
-    'action'
-  ];
+ displayedColumns = [
+  'foodmenuName',
+  'catagoryId',
+  'salesPrice',
+  'vatId',
+  'photo',
+  'action'
+];
 
   dataSource = new MatTableDataSource<Foodmenu>();
 
@@ -104,5 +106,26 @@ export class ViewfoodmenuComponent implements OnInit {
     });
 
   }
+  deleteFoodmenu(id: number): void {
+  if (!confirm('Are you sure you want to delete this food menu?')) {
+    return;
+  }
+
+  this.foodmenuService.deleteFoodmenu(id).subscribe({
+    next: () => {
+      console.log('Foodmenu deleted');
+
+      // Remove it immediately from the table
+      this.dataSource.data = this.dataSource.data.filter(
+        foodmenu => foodmenu.id !== id
+      );
+    },
+
+    error: (error) => {
+      console.error('Error deleting foodmenu:', error);
+    }
+  });
+}
 
 }
+

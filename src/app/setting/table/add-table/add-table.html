@@ -1,0 +1,175 @@
+<div class="container mt-4">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>Add Table</h2>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()"
+    >
+      Back
+    </button>
+
+  </div>
+
+
+  <!-- Form -->
+  <form
+    [formGroup]="tableForm"
+    (ngSubmit)="saveTable()"
+  >
+
+    <!-- Table Name -->
+    <div class="mb-3">
+
+      <label
+        for="tableName"
+        class="form-label"
+      >
+        Table Name
+      </label>
+
+      <input
+        id="tableName"
+        type="text"
+        class="form-control"
+        formControlName="tableName"
+        placeholder="Enter table name"
+      >
+
+      @if (
+        tableForm.controls.tableName.touched &&
+        tableForm.controls.tableName.invalid
+      ) {
+
+        <div class="text-danger mt-1">
+          Table name is required
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- Position -->
+    <div class="mb-3">
+
+      <label
+        for="position"
+        class="form-label"
+      >
+        Position
+      </label>
+
+      <input
+        id="position"
+        type="text"
+        class="form-control"
+        formControlName="position"
+        placeholder="Enter table position"
+      >
+
+      @if (
+        tableForm.controls.position.touched &&
+        tableForm.controls.position.invalid
+      ) {
+
+        <div class="text-danger mt-1">
+          Position is required
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- Seat Capacity -->
+    <div class="mb-3">
+
+      <label
+        for="seatCapacity"
+        class="form-label"
+      >
+        Seat Capacity
+      </label>
+
+      <input
+        id="seatCapacity"
+        type="text"
+        class="form-control"
+        formControlName="seatCapacity"
+        placeholder="Enter seat capacity"
+      >
+
+      @if (
+        tableForm.controls.seatCapacity.touched &&
+        tableForm.controls.seatCapacity.invalid
+      ) {
+
+        <div class="text-danger mt-1">
+          Seat capacity is required
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- Description -->
+    <div class="mb-3">
+
+      <label
+        for="description"
+        class="form-label"
+      >
+        Description
+      </label>
+
+      <textarea
+        id="description"
+        class="form-control"
+        formControlName="description"
+        placeholder="Enter description"
+        rows="4"
+      ></textarea>
+
+      @if (
+        tableForm.controls.description.touched &&
+        tableForm.controls.description.invalid
+      ) {
+
+        <div class="text-danger mt-1">
+          Description is required
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- Buttons -->
+    <div class="mt-4">
+
+      <button
+        type="submit"
+        class="btn btn-success me-2"
+      >
+        Save
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

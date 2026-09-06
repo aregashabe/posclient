@@ -35,11 +35,11 @@ import {
 })
 export class ViewDeliveryComponent implements OnInit {
 readonly deliveryService = inject(DeliveryService);
-  displayedColumns = [
-      'deliveryName',
-      'mobileNumber',
-      'actions'
-  ];
+ displayedColumns = [
+  'deliveryName',
+  'deliveryMobile',
+  'actions'
+];
 
 dataSource = new MatTableDataSource<Delivery>();
   readonly paginator = viewChild.required(MatPaginator);

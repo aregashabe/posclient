@@ -1,0 +1,189 @@
+<div class="container mt-4">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2>Table List</h2>
+
+    <a
+      routerLink="/addTable"
+      class="btn btn-success"
+    >
+      Add Table +
+    </a>
+
+  </div>
+
+
+  <!-- Table -->
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="mat-elevation-z8 w-100"
+  >
+
+    <!-- ID -->
+    <ng-container matColumnDef="id">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        ID
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let table"
+      >
+        {{ table.id }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Table Name -->
+    <ng-container matColumnDef="tableName">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Table Name
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let table"
+      >
+        {{ table.tableName }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Position -->
+    <ng-container matColumnDef="position">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Position
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let table"
+      >
+        {{ table.position }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Seat Capacity -->
+    <ng-container matColumnDef="seatCapacity">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        Seat Capacity
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let table"
+      >
+        {{ table.seatCapacity }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Description -->
+    <ng-container matColumnDef="description">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        Description
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let table"
+      >
+        {{ table.description }}
+      </td>
+
+    </ng-container>
+
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+      >
+        Actions
+      </th>
+
+      <td
+        mat-cell
+        *matCellDef="let table"
+      >
+
+        <button
+          type="button"
+          class="btn btn-primary btn-sm me-2"
+          (click)="editTable(table)"
+        >
+          Edit
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          (click)="deleteTable(table.id)"
+        >
+          Delete
+        </button>
+
+      </td>
+
+    </ng-container>
+
+
+    <!-- Header Row -->
+    <tr
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+    ></tr>
+
+
+    <!-- Data Row -->
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+
+  </table>
+
+
+  <!-- Paginator -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+
+</div>

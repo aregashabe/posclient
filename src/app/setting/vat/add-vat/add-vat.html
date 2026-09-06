@@ -1,0 +1,106 @@
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>Add VAT</h2>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancel()"
+    >
+      Back
+    </button>
+
+  </div>
+
+
+  <form
+    [formGroup]="vatForm"
+    (ngSubmit)="saveVat()"
+  >
+
+    <!-- VAT Name -->
+    <div class="mb-3">
+
+      <label
+        for="vatName"
+        class="form-label"
+      >
+        VAT Name
+      </label>
+
+      <input
+        id="vatName"
+        type="text"
+        class="form-control"
+        formControlName="vatName"
+        placeholder="Enter VAT name"
+      >
+
+      @if (
+        vatForm.controls.vatName.touched &&
+        vatForm.controls.vatName.invalid
+      ) {
+        <div class="text-danger mt-1">
+          VAT name is required
+        </div>
+      }
+
+    </div>
+
+
+    <!-- Percentage -->
+    <div class="mb-3">
+
+      <label
+        for="percentage"
+        class="form-label"
+      >
+        Percentage
+      </label>
+
+      <input
+        id="percentage"
+        type="text"
+        class="form-control"
+        formControlName="percentage"
+        placeholder="Enter VAT percentage"
+      >
+
+      @if (
+        vatForm.controls.percentage.touched &&
+        vatForm.controls.percentage.invalid
+      ) {
+        <div class="text-danger mt-1">
+          VAT percentage is required
+        </div>
+      }
+
+    </div>
+
+
+    <!-- Buttons -->
+    <div class="mt-4">
+
+      <button
+        type="submit"
+        class="btn btn-success me-2"
+      >
+        Save
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
+
