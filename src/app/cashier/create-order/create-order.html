@@ -2,47 +2,105 @@
 
   <div class="row">
 
-    <!-- FOOD MENU -->
+    <!-- ================================================= -->
+    <!-- SELECT FOOD -->
+    <!-- ================================================= -->
+
     <div class="col-md-8">
 
       <div class="card shadow">
 
+        <!-- HEADER -->
+
         <div class="card-header">
-          <h4 class="mb-0">Select Food</h4>
+
+          <div
+            class="d-flex justify-content-between align-items-center">
+
+            <h4 class="mb-0">
+              Select Food
+            </h4>
+
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              (click)="viewOrders()">
+
+              View Orders
+
+            </button>
+
+          </div>
+
         </div>
 
+
+        <!-- BODY -->
+
         <div class="card-body">
+
+
+          <!-- ================================================= -->
+          <!-- FOOD MENUS -->
+          <!-- ================================================= -->
 
           <div class="row">
 
             <div
-              class="col-md-4 mb-3"
-              *ngFor="let foodmenu of dataSource.data"
-            >
+              class="col-lg-4 col-md-6 mb-4"
 
-              <div class="card h-100 shadow-sm">
+              *ngFor="
+                let foodmenu of dataSource.data
+              ">
+
+              <div
+                class="card h-100 shadow-sm">
 
                 <div class="card-body">
 
+
+                  <!-- FOOD NAME -->
+
                   <h5 class="card-title">
+
                     {{ foodmenu.foodmenuName }}
+
                   </h5>
 
-                  <p class="card-text">
+
+                  <!-- DESCRIPTION -->
+
+                  <p class="text-muted">
+
                     {{ foodmenu.description }}
+
                   </p>
 
-                  <h6>
-                    {{ foodmenu.salesPrice }} ETB
-                  </h6>
+
+                  <!-- PRICE -->
+
+                  <h5>
+
+                    {{ foodmenu.salesPrice }}
+                    ETB
+
+                  </h5>
+
+
+                  <!-- ADD BUTTON -->
 
                   <button
                     type="button"
-                    class="btn btn-success w-100 mt-2"
-                    (click)="addToOrder(foodmenu)"
-                  >
-                    Add
+                    class="btn btn-success w-100 mt-3"
+
+                    (click)="
+                      addToOrder(foodmenu)
+                    ">
+
+                    Add to Order
+
                   </button>
+
 
                 </div>
 
@@ -52,6 +110,23 @@
 
           </div>
 
+
+          <!-- ================================================= -->
+          <!-- NO FOOD -->
+          <!-- ================================================= -->
+
+          <div
+            *ngIf="
+              dataSource.data.length === 0
+            "
+
+            class="alert alert-warning">
+
+            No food menus found.
+
+          </div>
+
+
         </div>
 
       </div>
@@ -59,86 +134,201 @@
     </div>
 
 
+    <!-- ================================================= -->
     <!-- CURRENT ORDER -->
+    <!-- ================================================= -->
+
     <div class="col-md-4">
 
       <div class="card shadow">
 
+
+        <!-- HEADER -->
+
         <div class="card-header">
+
           <h4 class="mb-0">
+
             Current Order
+
           </h4>
+
         </div>
+
+
+        <!-- BODY -->
 
         <div class="card-body">
 
-          <!-- NO ITEMS -->
-          <div *ngIf="orderItems.length === 0">
 
-            <p class="text-muted">
-              No items selected
-            </p>
+          <!-- ================================================= -->
+          <!-- EMPTY ORDER -->
+          <!-- ================================================= -->
+
+          <div
+            *ngIf="
+              orderItems.length === 0
+            "
+
+            class="text-center text-muted">
+
+            No items selected
 
           </div>
 
 
-          <!-- SELECTED ITEMS -->
-          <div
-            *ngFor="let item of orderItems"
-            class="mb-3"
-          >
+          <!-- ================================================= -->
+          <!-- ORDER ITEMS -->
+          <!-- ================================================= -->
 
-            <div class="d-flex justify-content-between">
+          <div
+            *ngFor="
+              let item of orderItems
+            "
+
+            class="border-bottom pb-3 mb-3">
+
+
+            <div
+              class="d-flex justify-content-between">
+
+
+              <!-- ITEM INFORMATION -->
 
               <div>
 
                 <strong>
+
                   {{ item.foodmenuName }}
+
                 </strong>
+
 
                 <br>
 
+
                 <small class="text-muted">
-                  {{ item.salesPrice }} ETB × {{ item.quantity }}
+
+                  {{ item.salesPrice }}
+                  ETB
+
+                  ×
+
+                  {{ item.quantity }}
+
                 </small>
 
               </div>
 
+
+              <!-- ITEM TOTAL -->
+
               <strong>
-                {{ item.salesPrice * item.quantity }} ETB
+
+                {{
+                  item.salesPrice *
+                  item.quantity
+                }}
+
+                ETB
+
               </strong>
+
 
             </div>
 
           </div>
 
 
+          <!-- ================================================= -->
+          <!-- TOTALS -->
+          <!-- ================================================= -->
+
           <hr>
 
 
           <!-- TOTAL -->
-          <div class="d-flex justify-content-between">
 
-            <strong>
+          <div
+            class="d-flex justify-content-between">
+
+            <span>
+
               Total:
-            </strong>
+
+            </span>
 
             <strong>
-              {{ getTotal() }} ETB
+
+              {{ getTotal() }}
+              ETB
+
             </strong>
 
           </div>
 
 
+          <!-- VAT -->
+
+          <div
+            class="d-flex justify-content-between mt-2">
+
+            <span>
+
+              VAT:
+
+            </span>
+
+            <strong>
+
+              {{ getVatAmount() }}
+              ETB
+
+            </strong>
+
+          </div>
+
+
+          <!-- GRAND TOTAL -->
+
+          <div
+            class="d-flex justify-content-between mt-2">
+
+            <strong>
+
+              Grand Total:
+
+            </strong>
+
+            <strong>
+
+              {{ getGrandTotal() }}
+              ETB
+
+            </strong>
+
+          </div>
+
+
+          <!-- ================================================= -->
           <!-- SAVE ORDER -->
+          <!-- ================================================= -->
+
           <button
             type="button"
-            class="btn btn-primary w-100 mt-3"
-            [disabled]="orderItems.length === 0"
-            (click)="saveOrder()"
-          >
+
+            class="btn btn-primary w-100 mt-4"
+
+            [disabled]="
+              orderItems.length === 0
+            "
+
+            (click)="saveOrder()">
+
             Save Order
+
           </button>
+
 
         </div>
 

@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import {
   FormGroup,
@@ -24,6 +25,9 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
+  // Password visibility
+  showPassword = false;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -35,6 +39,10 @@ export class LoginComponent {
       password: ['', Validators.required]
     });
 
+  }
+
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
   }
 
   onSubmit(): void {

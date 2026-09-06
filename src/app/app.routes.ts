@@ -4,6 +4,7 @@ import { EditDeliveryComponent }
   from './employee/delivery/edit-delivery/edit-delivery.component';
   import { CreateOrder } from './cashier/create-order/create-order';
 import { CashierDashboardComponent } from './cashier/cashier-dashboard/cashier-dashboard';
+import { cashierGuard } from './guards/cashier.guard';
 
 export const routes: Routes = [
 
@@ -122,7 +123,8 @@ export const routes: Routes = [
 },
 {
   path: 'cashier-dashboard',
-  component: CashierDashboardComponent
+  component: CashierDashboardComponent,
+  canActivate: [cashierGuard]
 },
 {
   path: 'viewVat',
@@ -171,6 +173,12 @@ export const routes: Routes = [
   loadComponent:()=>
     import('./master/ingredient/add-ingredient/add-ingredient')
   .then(m=>m.AddIngredient)
+},
+{
+  path: 'view-orders',
+  loadComponent: () =>
+    import('./cashier/view-order/view-order')
+      .then(m => m.ViewOrder)
 }
     ]
   }

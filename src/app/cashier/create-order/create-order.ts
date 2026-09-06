@@ -1,11 +1,18 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  inject,
+  ChangeDetectorRef
+} from '@angular/core';
+
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
 import {
   MatTableModule,
   MatTableDataSource
 } from '@angular/material/table';
+
+import { Router } from '@angular/router';
 
 import { FoodmenuService } from '../../services/foodmenu.service';
 import { Foodmenu } from '../../models/foodmenu';
@@ -14,53 +21,101 @@ import { PosOrderService } from '../../services/pos-order.service';
 @Component({
   selector: 'app-create-order',
   standalone: true,
+
   imports: [
     CommonModule,
-    RouterLink,
     MatTableModule
   ],
+
   templateUrl: './create-order.html',
   styleUrl: './create-order.scss'
 })
 export class CreateOrder implements OnInit {
 
-  readonly foodmenuService =
+  // ================= SERVICES =================
+
+  private readonly foodmenuService =
     inject(FoodmenuService);
 
-  readonly posOrderService =
+  private readonly posOrderService =
     inject(PosOrderService);
 
-  dataSource =
-    new MatTableDataSource<Foodmenu>();
+  private readonly router =
+    inject(Router);
 
-  orderItems: any[] = [];
+  private readonly cdr =
+    inject(ChangeDetectorRef);
+
+
+  // ================= FOOD MENU =================
+
+  dataSource =
+    new MatTableDataSource<Foodmenu>([]);
+
+
+  // ================= CURRENT ORDER =================
+
+  orderItems: any[] = JSON.parse(
+    localStorage.getItem('currentOrder') || '[]'
+  );
+
+
+  // ================= INIT =================
 
   ngOnInit(): void {
-    this.loadFoodmenus();
-  }
 
-  loadFoodmenus(): void {
+    console.log('CREATE ORDER STARTED');
+
+    console.log('LOADING FOOD MENUS...');
 
     this.foodmenuService
       .getFoodmenus()
       .subscribe({
 
-        next: (foodmenus: Foodmenu[]) => {
+        // ================= SUCCESS =================
+
+        next: (response) => {
 
           console.log(
-            'Foodmenus:',
-            foodmenus
+            'FOOD MENUS FROM API:',
+            response
           );
 
-          this.dataSource.data =
-            foodmenus;
+          console.log(
+            'IS ARRAY:',
+            Array.isArray(response)
+          );
+
+          console.log(
+            'FOOD MENU COUNT:',
+            response.length
+          );
+
+
+          // Put API data into datasource
+
+          this.dataSource.data = response;
+
+
+          // Force Angular to update UI
+
+          this.cdr.detectChanges();
+
+
+          console.log(
+            'DATASOURCE COUNT:',
+            this.dataSource.data.length
+          );
 
         },
+
+
+        // ================= ERROR =================
 
         error: (error) => {
 
           console.error(
-            'Error fetching foodmenus:',
+            'FOOD MENU ERROR:',
             error
           );
 
@@ -71,7 +126,17 @@ export class CreateOrder implements OnInit {
   }
 
 
-  addToOrder(foodmenu: Foodmenu): void {
+  // ================= ADD FOOD =================
+
+  addToOrder(
+    foodmenu: Foodmenu
+  ): void {
+
+    console.log(
+      'ADDING FOOD:',
+      foodmenu
+    );
+
 
     const existingItem =
       this.orderItems.find(
@@ -79,44 +144,80 @@ export class CreateOrder implements OnInit {
           item.foodMenuId === foodmenu.id
       );
 
+
+    // ================= EXISTING ITEM =================
+
     if (existingItem) {
 
       existingItem.quantity++;
 
-    } else {
+    }
+
+
+    // ================= NEW ITEM =================
+
+    else {
 
       this.orderItems.push({
 
-        foodMenuId: foodmenu.id,
+        foodMenuId:
+          foodmenu.id,
 
         foodmenuName:
           foodmenu.foodmenuName,
 
         salesPrice:
-          foodmenu.salesPrice,
+          Number(foodmenu.salesPrice),
 
-        quantity: 1
+        quantity:
+          1
 
       });
 
     }
 
+
+    // Save to localStorage
+
+    this.saveCurrentOrder();
+
+
     console.log(
-      'Current order:',
+      'CURRENT ORDER:',
       this.orderItems
     );
 
   }
 
 
+  // ================= SAVE CURRENT ORDER =================
+
+  saveCurrentOrder(): void {
+
+    localStorage.setItem(
+      'currentOrder',
+      JSON.stringify(
+        this.orderItems
+      )
+    );
+
+  }
+
+
+  // ================= TOTAL =================
+
   getTotal(): number {
 
     return this.orderItems.reduce(
 
-      (total, item) =>
+      (
+        total,
+        item
+      ) =>
+
         total +
-        (Number(item.salesPrice) *
-        Number(item.quantity)),
+        Number(item.salesPrice) *
+        Number(item.quantity),
 
       0
 
@@ -125,29 +226,51 @@ export class CreateOrder implements OnInit {
   }
 
 
+  // ================= VAT =================
+
   getVatAmount(): number {
 
-    // For now VAT is 0.
-    // Later we can connect your VAT feature.
+    // VAT calculation can be added later
 
     return 0;
 
   }
 
 
+  // ================= GRAND TOTAL =================
+
   getGrandTotal(): number {
 
     return (
+
       this.getTotal() +
       this.getVatAmount()
+
     );
 
   }
 
 
+  // ================= VIEW ORDERS =================
+
+  viewOrders(): void {
+
+    this.router.navigate([
+      '/view-orders'
+    ]);
+
+  }
+
+
+  // ================= SAVE ORDER =================
+
   saveOrder(): void {
 
-    if (this.orderItems.length === 0) {
+    // Don't save empty order
+
+    if (
+      this.orderItems.length === 0
+    ) {
 
       alert(
         'Please add food to the order.'
@@ -158,15 +281,7 @@ export class CreateOrder implements OnInit {
     }
 
 
-    const total =
-      this.getTotal();
-
-    const vatAmount =
-      this.getVatAmount();
-
-    const grandTotal =
-      this.getGrandTotal();
-
+    // ================= ORDER OBJECT =================
 
     const order = {
 
@@ -180,80 +295,115 @@ export class CreateOrder implements OnInit {
 
       options: '',
 
-      total: total,
+      total:
+        this.getTotal(),
 
-      vatAmount: vatAmount,
+      vatAmount:
+        this.getVatAmount(),
 
-      grandTotal: grandTotal,
+      grandTotal:
+        this.getGrandTotal(),
 
-      paymentStatus: 'Pending',
+      paymentStatus:
+        'Pending',
 
-      paymentType: null,
+      paymentType:
+        null,
 
-      hold: null,
+      hold:
+        null,
 
       items:
-        this.orderItems.map(item => ({
 
-          foodMenuId:
-            item.foodMenuId,
+        this.orderItems.map(
+          item => ({
 
-          salesPrice:
-            Number(item.salesPrice),
+            foodMenuId:
+              item.foodMenuId,
 
-          quantity:
-            Number(item.quantity)
+            salesPrice:
+              Number(
+                item.salesPrice
+              ),
 
-        }))
+            quantity:
+              Number(
+                item.quantity
+              )
+
+          })
+        )
 
     };
 
 
     console.log(
-      'Sending order:',
+      'SENDING ORDER:',
       order
     );
 
+
+    // ================= API =================
 
     this.posOrderService
       .createOrder(order)
       .subscribe({
 
+        // ================= SUCCESS =================
+
         next: (response) => {
 
           console.log(
-            'Order saved successfully:',
+            'ORDER SAVED:',
             response
           );
+
 
           alert(
             'Order saved successfully.'
           );
 
+
+          // Clear current order
+
           this.orderItems = [];
 
+
+          // Remove localStorage
+
+          localStorage.removeItem(
+            'currentOrder'
+          );
+
         },
+
+
+        // ================= ERROR =================
 
         error: (error) => {
 
           console.error(
-            'Status:',
+            'STATUS:',
             error.status
           );
 
           console.error(
-            'Error body:',
+            'ERROR BODY:',
             error.error
           );
 
           console.error(
-            'Full error:',
+            'FULL ERROR:',
             error
           );
 
+
           alert(
+
             error.error?.message ||
+
             'Error saving order.'
+
           );
 
         }
