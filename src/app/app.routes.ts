@@ -120,11 +120,12 @@ export const routes: Routes = [
   {
   path: 'create-order',
   component: CreateOrder
+  
 },
 {
   path: 'cashier-dashboard',
   component: CashierDashboardComponent,
-  canActivate: [cashierGuard]
+ 
 },
 {
   path: 'viewVat',
